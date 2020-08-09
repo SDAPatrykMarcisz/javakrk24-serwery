@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -20,6 +21,7 @@ public class LoginServlet extends HttpServlet {
         //(opcjonalnie z informacja ze nie udalo sie zalogowac)
         boolean loginResult = service.verifyUser(login, password);
         if(loginResult){
+            req.getSession().setAttribute("isLogged", true);
             resp.sendRedirect("login-success.jsp");
         } else {
             resp.sendRedirect("login-page.jsp");
